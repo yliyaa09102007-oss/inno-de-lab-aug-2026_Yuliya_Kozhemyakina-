@@ -6,7 +6,6 @@ VALUES
 	--listing all the values needed to be added according to their type
 	('Yuliya', 'Kozhemyakina', 'SMM', 90000.00),			--but i wanna work as an IT specialist *cry emoji*
 	('Natalya', 'Kozhemyakina', 'Finance', 91000.00)
-ON CONFLICT (employeeid) DO NOTHING; 						--so i can run all commands without error messages
 
 --the second command
 SELECT * FROM employees AS e;
