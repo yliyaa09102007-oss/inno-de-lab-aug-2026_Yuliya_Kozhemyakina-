@@ -1,11 +1,11 @@
 SET search_path TO employeesdata, public;   --redirecting my commands to a different schema "employeesdata"
 
 --the first command
-INSERT INTO employees (employeeid, firstname, lastname, department, salary)
+INSERT INTO employees (firstname, lastname, department, salary)
 VALUES
 	--listing all the values needed to be added according to their type
-	(6, 'Yuliya', 'Kozhemyakina', 'SMM', 90000.00),			--but i wanna work as an IT specialist *cry emoji*
-	(7, 'Natalya', 'Kozhemyakina', 'Finance', 91000.00)
+	('Yuliya', 'Kozhemyakina', 'SMM', 90000.00),			--but i wanna work as an IT specialist *cry emoji*
+	('Natalya', 'Kozhemyakina', 'Finance', 91000.00)
 ON CONFLICT (employeeid) DO NOTHING; 						--so i can run all commands without error messages
 
 --the second command

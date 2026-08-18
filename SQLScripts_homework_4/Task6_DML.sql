@@ -40,16 +40,18 @@ SELECT * FROM employeesdata.projects p;
 --adding a new employee and assinging him to a project
 ROLLBACK;
 BEGIN;
-	INSERT INTO employeesdata.employees (employeeid, firstname, lastname, department, salary)
-	VALUES		
-		(5, 'Kirill', 'Ivanov', 'Finance', 57000.00)
-	ON CONFLICT (employeeid) DO NOTHING
-	RETURNING employeeid; --getting ID (only when adding for the first time bc if "ON CONFLICT DO NOTHING")
+	WITH new_employee AS (
+		INSERT INTO employeesdata.employees (firstname, lastname, department, salary)
+		VALUES		
+			('Kirill', 'Ivanov', 'Finance', 57000.00)
+		ON CONFLICT (employeeid) DO NOTHING
+		RETURNING employeeid --getting ID (only when adding for the first time bc if "ON CONFLICT DO NOTHING")
+	)
 	
 	INSERT INTO employeesdata.employeeprojects (employeeid, projectid, hoursworked)
 	SELECT 
-    	5, p.projectid, 80
-	FROM employeesdata.projects p
+    	n.employeeid, p.projectid, 80
+	FROM employeesdata.projects p, new_employee n
 	WHERE p.projectname = 'Website Redesign'
 	ON CONFLICT (employeeid, projectid) DO NOTHING;
 COMMIT;

@@ -19,10 +19,11 @@ WHERE NOT EXISTS (
 --transaction (adding a project and assinging employees to it)
 BEGIN;
 
-INSERT INTO employeesdata.projects (projectid, projectname, budget, startdate, enddate)
+INSERT INTO employeesdata.projects (projectname, budget, startdate, enddate)
 VALUES
-	(4, 'Game Development', 300000, '2025-12-15', '2026-12-15')			
-ON CONFLICT (projectid) DO NOTHING;
+	('Game Development', 300000, '2025-12-15', '2026-12-15')			
+ON CONFLICT (projectid) DO NOTHING
+RETURNING projectid;
 
 INSERT INTO employeesdata.employeeprojects (employeeid, projectid, hoursworked)
 VALUES

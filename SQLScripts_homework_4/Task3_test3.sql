@@ -1,6 +1,6 @@
-INSERT INTO employeesdata.employees (employeeid, firstname, lastname, department, salary)
+INSERT INTO employeesdata.employees (firstname, lastname, department, salary)
 VALUES
-	(8, 'Nastya', 'Goncharova', 'IT', 51000.00);
+	('Nastya', 'Goncharova', 'IT', 51000.00);
 
 UPDATE employeesdata.employees 
 SET salary = 85000
