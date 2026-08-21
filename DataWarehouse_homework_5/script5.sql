@@ -9,4 +9,4 @@ SELECT
 FROM FactAppointments AS f
 INNER JOIN DimDate AS d ON f.DateID = d.DateID
 GROUP BY d.Month
-ORDER BY appointmentscount, d.Month;
+ORDER BY appointmentscount, d.Month DESC;
