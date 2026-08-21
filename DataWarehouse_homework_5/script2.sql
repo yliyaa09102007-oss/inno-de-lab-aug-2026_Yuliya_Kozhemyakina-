@@ -9,6 +9,6 @@ SELECT
     AVG(f.TotalCost) AS AvgCheck,
     AVG(f.Duration) AS AvgDurationMin
 FROM FactAppointments AS f
-INNER JOIN DimServiceType AS st ON f.ServiceTypeID = st.ServiceTypeID
+INNER JOIN DimServiceType AS st ON f.ServiceTypeSK = st.ServiceTypeSK
 GROUP BY st.ServiceTypeID, st.ServiceName, st.ServiceCategory
 ORDER BY totalrevenue DESC;
