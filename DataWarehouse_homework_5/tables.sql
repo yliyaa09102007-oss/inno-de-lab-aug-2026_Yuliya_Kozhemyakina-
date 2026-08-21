@@ -1,0 +1,79 @@
+CREATE TABLE DimSpecies(
+	SpeciesID INTEGER PRIMARY KEY,
+	SpeciesName VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE DimCity(
+	CityID INTEGER PRIMARY KEY,
+	CityName VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE DimSpecialization(
+	SpecializationID INTEGER PRIMARY KEY,
+	SpecializationName VARCHAR(100) NOT NULL,
+	SpecDescription VARCHAR(200)
+);
+
+
+CREATE TABLE DimOwners(
+	OwnerID INTEGER PRIMARY KEY,
+	FirstName VARCHAR(100) NOT NULL,
+	LastName VARCHAR(100) NOT NULL,
+	Phone VARCHAR(20) NOT NULL,
+	Email VARCHAR(100),
+	CityID INTEGER,
+	CONSTRAINT FK_OwnerCity FOREIGN KEY (CityID) REFERENCES DimCity(CityID)
+);
+
+CREATE TABLE DimPets(
+	PetID INTEGER PRIMARY KEY,
+	PetName VARCHAR(100) NOT NULL,
+	BirthDate DATE,						--some owners don't know the birthdate of their pets, so i also add Age
+	Age INTEGER,
+	SpeciesID INTEGER NOT NULL,
+	CONSTRAINT FK_PetsSpecies FOREIGN KEY (SpeciesID) REFERENCES DimSpecies(SpeciesID),
+	CONSTRAINT CHK_PetsBirthAge CHECK (BirthDate IS NOT NULL OR Age IS NOT NULL)
+);
+
+CREATE TABLE DimVets (
+    VetID INTEGER PRIMARY KEY,
+    FirstName VARCHAR(100) NOT NULL,
+    LastName VARCHAR(100) NOT NULL,
+    Phone VARCHAR(20) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    SpecializationID INTEGER,
+    CONSTRAINT FK_VetsSpecialization FOREIGN KEY (SpecializationID) REFERENCES DimSpecialization(SpecializationID)
+);
+
+CREATE TABLE DimDate (
+    DateID INTEGER PRIMARY KEY,
+    FullDate DATE NOT NULL,
+    Year INTEGER NOT NULL,
+    Month INTEGER NOT NULL,
+    DayOfTheWeek VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE DimServiceType (
+    ServiceTypeID INTEGER PRIMARY KEY,
+    ServiceName VARCHAR(100) NOT NULL,
+    ServiceCategory VARCHAR(50),
+    Price DECIMAL(10,2)
+);
+
+CREATE TABLE FactAppointments (
+    FactID INTEGER PRIMARY KEY,
+    AppointmentID INTEGER NOT NULL,
+    VetID INTEGER NOT NULL,
+    PetID INTEGER NOT NULL,
+    OwnerID INTEGER NOT NULL,
+    DateID INTEGER NOT NULL,
+    ServiceTypeID INTEGER NOT NULL,
+    TotalCost DECIMAL(10,2) NOT NULL,
+    Duration INTEGER NOT NULL,
+
+    CONSTRAINT FK_FactVet FOREIGN KEY (VetID) REFERENCES DimVets(VetID),
+    CONSTRAINT FK_FactPet FOREIGN KEY (PetID) REFERENCES DimPets(PetID),
+    CONSTRAINT FK_FactOwner FOREIGN KEY (OwnerID) REFERENCES DimOwners(OwnerID),
+    CONSTRAINT FK_FactDate FOREIGN KEY (DateID) REFERENCES DimDate(DateID),
+    CONSTRAINT FK_FactServiceType FOREIGN KEY (ServiceTypeID) REFERENCES DimServiceType(ServiceTypeID)
+);
