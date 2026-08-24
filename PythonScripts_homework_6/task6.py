@@ -2,31 +2,33 @@
 isactive = True
 #starting Calculator
 while isactive:
-    first_number = input("Введите первое число: ")
-    second_number = input("Введите второе число: ")
+    #now using try/except to check for valid input
+    try:
+        first_number = float(input("Введите первое число: "))
+        second_number = float(input("Введите второе число: "))
+    except ValueError:
+        print("Ошибка: введите число!")
+        continue
 
-    #checking for valid values
-    if first_number.isdigit() and second_number.isdigit():
-        first_number = int(first_number)    #converting string to int
-        second_number = int(second_number)
-
-        operation_sign = input("Выберите оператор: (+, -, *, /): ")
-        if operation_sign == "+":
-            result = first_number + second_number
-            print(f"Результат: {first_number} + {second_number} = {result}")
-        elif operation_sign == "-":
-            result = first_number - second_number
-            print(f"Результат: {first_number} - {second_number} = {result}")
-        elif operation_sign == "*":
-            result = first_number * second_number
-            print(f"Результат: {first_number} * {second_number} = {result}")
-        elif operation_sign == "/":
+    operation_sign = input("Выберите оператор: (+, -, *, /): ")
+    if operation_sign == "+":
+        result = first_number + second_number
+        print(f"Результат: {first_number} + {second_number} = {result}")
+    elif operation_sign == "-":
+        result = first_number - second_number
+        print(f"Результат: {first_number} - {second_number} = {result}")
+    elif operation_sign == "*":
+        result = first_number * second_number
+        print(f"Результат: {first_number} * {second_number} = {result}")
+    elif operation_sign == "/":
+        if second_number != 0:
             result = first_number / second_number
             print(f"Результат: {first_number} / {second_number} = {result}")
         else:
-            print("Что-то пошло не так. Скорее всего, вы ввели некорректный оператор!")
+            print("Деление на ноль!")
     else:
-        print("Вы ввели некорректные значения!")
+        print("Что-то пошло не так. Скорее всего, вы ввели некорректный оператор!")
+
 
     print("") #just an empty line
     isactive2 = True
