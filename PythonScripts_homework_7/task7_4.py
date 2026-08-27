@@ -16,9 +16,6 @@ missing_roles = required_admin_roles.difference(requested_roles_set)
 print(f"Недостающие административные роли: {missing_roles}")
 
 #checking if security officer is present
-if "security_officer" in requested_roles_set:
-    has_security_officer = True
-else:
-    has_security_officer = False
-
+has_security_officer = "security_officer" in requested_roles_set            #now it takes fewer lines
+                                                                            #though it was a recommendation I believe it's really better to change this
 print(f"Наличие роли security_officer в запросе: {has_security_officer}")

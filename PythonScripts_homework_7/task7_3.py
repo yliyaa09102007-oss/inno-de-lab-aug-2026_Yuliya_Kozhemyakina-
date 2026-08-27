@@ -10,8 +10,14 @@ host_value = db_config["connection"]["host"]
 port_value = db_config["connection"]["port"]
 
 #safely checking if there is a value for key "ssl_settings"
-ssl_settings_default = db_config["connection"].get("ssl_settings", "verify-full")
-print(f"SSL Mode: {ssl_settings_default}")
+ssl_settings = db_config["connection"].get("ssl_settings")
+
+if ssl_settings is None:
+    ssl_mode = "verify-full"
+else:
+    ssl_mode = ssl_settings.get("ssl_mode", "verify-full")
+
+print(f"SSL Mode: {ssl_mode}")
 
 #changing and adding info
 db_config["connection"]["user"] = "admin"

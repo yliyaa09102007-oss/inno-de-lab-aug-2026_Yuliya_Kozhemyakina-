@@ -11,24 +11,16 @@ for i in range(0, len(split_user_record)):
     strip_user_record.append(split_user_record[i].strip())
 
 #dividing a list into different strings
-PersonID = strip_user_record[0]
-FullName = strip_user_record[1]
-City = strip_user_record[2]
-Status = strip_user_record[3]
 
 #normalizing every string
-PersonID = "UID-" + PersonID
+strip_user_record[0] = f"UID-{strip_user_record[0]}"
 
-FullName = FullName.split('_')
-FirstName = FullName[0].title()
-LastName = FullName[1].title()
-FullName = FirstName + ' ' + LastName
-#also could've kept firstname and second name independently
+strip_user_record[1] = strip_user_record[1].split('_')
+strip_user_record[1] = (strip_user_record[1][0] + ' ' + strip_user_record[1][1]).title()
 
-City = City.upper()
+strip_user_record[2] = strip_user_record[2].upper()
 
-Status = Status.lower()
+strip_user_record[3] = strip_user_record[3].lower()
 
-normalized_user_record = (PersonID + ' | ' + FullName + ' | ' + City +
-' | ' + Status)
+normalized_user_record = " | ".join(strip_user_record)
 print(f"Нормализованная запись: {normalized_user_record}")
