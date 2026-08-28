@@ -10,13 +10,10 @@ strip_user_record = []
 for i in range(0, len(split_user_record)):
     strip_user_record.append(split_user_record[i].strip())
 
-#dividing a list into different strings
-
 #normalizing every string
 strip_user_record[0] = f"UID-{strip_user_record[0]}"
 
-strip_user_record[1] = strip_user_record[1].split('_')
-strip_user_record[1] = (strip_user_record[1][0] + ' ' + strip_user_record[1][1]).title()
+strip_user_record[1] = strip_user_record[1].replace('_', ' ').title()
 
 strip_user_record[2] = strip_user_record[2].upper()
 

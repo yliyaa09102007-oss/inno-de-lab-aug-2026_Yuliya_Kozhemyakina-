@@ -1,3 +1,5 @@
+import json #importing json to print the dictionary
+
 system_telemetry = [
     ("srv_01", 12.5, 64, "online"),
     ("srv_02", 85.0, 92, "online"),
@@ -17,14 +19,17 @@ for nodes in system_telemetry:
         cpu_list.append(cpu)
         ram_list.append(ram)
 
-#printing the result (not sure how to do it differently, I feel like I hardcoded it but ok)
+metrics_dict = {
+    "active_nodes_count" : len(active_nodes),
+    "metrics": {
+        "average_cpu": round(sum(cpu_list)/len(cpu_list),2),
+        "max_ram": max(ram_list)
+    }
+}
+
+#printing the result
 print(f"Активные узлы в сети: {active_nodes}")
 print("Итоговый отчёт телеметрии:")
-print("{\n"
-    "active_nodes_count: " + str(len(active_nodes)) + ",\n"
-    "'metrics': {\n"
-    "   'average_cpu': " + str(round(sum(cpu_list)/len(cpu_list),2)) + ",\n"
-    "   'max_ram': " + str(max(ram_list)) + "\n"
-    "   }\n"
-    "}")
+#found this method to print the dictionary so it's readable
+print(json.dumps(metrics_dict, indent=4))
 
