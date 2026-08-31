@@ -5,8 +5,10 @@
 import time
 from typing import Callable, Any
 
+
 PERFORMANCE_LOG_PREFIX = "[PERF_LOG]"
 TIME_DECIMALS = 8
+
 
 def performance_logger(func: Callable) -> Callable:
     def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -23,8 +25,10 @@ def performance_logger(func: Callable) -> Callable:
         return result
     return wrapper
 
+
 @performance_logger
-def get_sorted_report(revenue_data: list[dict[str, str | float]]):
+def get_sorted_report(revenue_data: list[dict[str, str | float]]) \
+        -> list[dict[str, str | float]]:
     """
     This function sorts the given list of dictionaries by key 'total_sales' from the highest to lowest.
     Args:
@@ -34,6 +38,7 @@ def get_sorted_report(revenue_data: list[dict[str, str | float]]):
     """
     sorted_revenue_data = sorted(revenue_data, key = lambda x: x['total_sales'], reverse=True)
     return sorted_revenue_data
+
 
 def format_output(revenue_data: list[dict[str, str | float]]) -> str:
     """
@@ -48,21 +53,22 @@ def format_output(revenue_data: list[dict[str, str | float]]) -> str:
     for i, item in enumerate(revenue_data):
         print(f"{i+1}. {item['category']}: {item['total_sales']}")
 
+
 #defining test lists
 test1 = [
-{"category": "Action", "total_sales": 4311.85},
-{"category": "Animation", "total_sales": 4656.30},
-{"category": "Children", "total_sales": 3655.55}
+    {"category": "Action", "total_sales": 4311.85},
+    {"category": "Animation", "total_sales": 4656.30},
+    {"category": "Children", "total_sales": 3655.55}
 ]
 
 test2 = [
-{"category": "Classics", "total_sales": 1200.10},
-{"category": "Comedy", "total_sales": 4000.00},
-{"category": "Documentary", "total_sales": 4000.00}
+    {"category": "Classics", "total_sales": 1200.10},
+    {"category": "Comedy", "total_sales": 4000.00},
+    {"category": "Documentary", "total_sales": 4000.00}
 ]
 
 test3 = [
-{"category": "Drama", "total_sales": 500.00}
+    {"category": "Drama", "total_sales": 500.00}
 ]
 
 #calling the functions and getting a result

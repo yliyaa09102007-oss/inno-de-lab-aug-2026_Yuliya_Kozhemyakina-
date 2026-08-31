@@ -4,12 +4,14 @@
 
 MAX_RENTAL_BATCH_LIMIT = 150.0
 
+
 #creating a wrapper to format the output
 def format_output(func):
     def wrapper(*args, **kwargs):
         batch_index, name, total, is_limit_exceeded = func(*args, **kwargs)
         return f"Партия {batch_index} ({name}): Сумма: {total}$. Превышение лимита: {is_limit_exceeded}"
     return wrapper
+
 
 #creating a function to calculate rental batch
 #now we can give the function name and batch_index, though we don't use it inside the function,
@@ -35,6 +37,7 @@ def calculate_rental_batch(quantity: int, rental_rate: float,
 
     return batch_index, name, final_sum, is_limit_exceeded
 
+z
 #printing the report and calling the function
 print("=== ОТЧЁТ ПО ПАРТИЯМ АРЕНДЫ ===")
 print(f"{calculate_rental_batch(batch_index = 1, name = 'Academy Dinosaur', quantity = 30, rental_rate = 2.99)}")
