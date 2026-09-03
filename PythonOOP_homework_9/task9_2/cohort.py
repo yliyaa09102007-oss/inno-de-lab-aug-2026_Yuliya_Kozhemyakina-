@@ -1,4 +1,5 @@
-from trainee import *
+from trainee import Trainee
+
 
 class Cohort:
     """Cohort class"""

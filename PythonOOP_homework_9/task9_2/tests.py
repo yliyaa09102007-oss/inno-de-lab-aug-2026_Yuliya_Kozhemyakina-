@@ -1,5 +1,5 @@
-from cohort import *
-from trainee import *
+from cohort import Cohort
+from trainee import Trainee, HardworkingTrainee, AuditTrainee
 
 # 1. Создаем учащихся разных типов
 std_trainee = Trainee("Алексей", "Смирнов", score=8, passing_grade=10)
