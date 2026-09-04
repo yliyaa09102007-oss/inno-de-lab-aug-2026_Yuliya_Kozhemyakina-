@@ -10,7 +10,7 @@ class Trainee:
         """
         self.name = name
         self.surname = surname
-        self.__score = score
+        self.score = score
         self.passing_grade = passing_grade
 
     @property
